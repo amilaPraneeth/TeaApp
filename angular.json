@@ -14,6 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/tea-app",
+            
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -51,16 +52,27 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "TeaApp:build",
+            "proxyConfig": "src/proxyConfig.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "TeaApp:build:production"
+            
             },
             "development": {
               "browserTarget": "TeaApp:build:development"
@@ -72,6 +84,8 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "TeaApp:build"
+                  
+            
           }
         },
         "test": {
@@ -94,5 +108,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "92e59ac8-1009-4a55-b459-1c31e2b08ec5"
   }
 }
